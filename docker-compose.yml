@@ -1,0 +1,11 @@
+version: "3.7"
+
+services: 
+  haproxy:
+    container_name: haproxy-w3c-tracecontext
+    restart: always
+    image: haproxy:2.4
+    ports:
+      - "8080:8080"
+    volumes: 
+      - ./haproxy:/usr/local/etc/haproxy:ro
