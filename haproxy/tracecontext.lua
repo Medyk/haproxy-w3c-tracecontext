@@ -10,7 +10,7 @@ local function get_header(headers, name)
     if headers ~= nil and name ~= nil and headers[name] ~= nil and headers[name][0] ~= nil then
         return headers[name][0]
     end
-    return nil
+    return ''
 end
 
 
@@ -20,8 +20,8 @@ local function tracecontext_req(txn)
     local traceparent = get_header(headers, 'traceparent')
     local tracestate = get_header(headers, 'tracestate')
 
-    if traceparent == nil then
-        traceparent = string.gsub('00-xxxxxxxxxxxx4xxxyxxxxxxxxxxxxxxx-xxxxxxxxx4xxxyxx-01', '[xy]', template_to_hex)
+    if traceparent == '' then
+        traceparent = string.gsub('00-xxxxxxxxxxxx4xxxyxxxxxxxxxxxxxxx-xxxyxxxxxxxxxxxx-01', '[xy]', template_to_hex)
         txn.http:req_set_header('traceparent', traceparent)
     end
 
